@@ -1,13 +1,15 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from 'react'
+import styled from 'styled-components/macro'
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import { COLORS, QUERIES, WEIGHTS } from '../../constants'
+import Logo from '../Logo'
+import SuperHeader from '../SuperHeader'
+import MobileMenu from '../MobileMenu'
+import UnstyledButton from '../UnstyledButton'
+import Icon from '../Icon'
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false)
 
   // For our mobile hamburger menu, we'll want to use a button
   // with an onClick handler, something like this:
@@ -28,6 +30,15 @@ const Header = () => {
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
+          <MobileButton>
+            <Icon id="shopping-bag" strokeWidth={1} />
+          </MobileButton>
+          <MobileButton>
+            <Icon id="search" strokeWidth={1} />
+          </MobileButton>
+          <MobileButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id="menu" strokeWidth={1} />
+          </MobileButton>
         </Nav>
         <Side />
       </MainHeader>
@@ -37,8 +48,8 @@ const Header = () => {
         onDismiss={() => setShowMobileMenu(false)}
       />
     </header>
-  );
-};
+  )
+}
 
 const MainHeader = styled.div`
   display: flex;
@@ -46,17 +57,28 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-`;
+`
 
 const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
-`;
+
+  @media ${QUERIES.tabletAndDown} {
+    gap: 40px;
+    margin: 0;
+  }
+`
 
 const Side = styled.div`
   flex: 1;
-`;
+
+  @media ${QUERIES.tabletAndDown} {
+    &:last-of-type {
+      display: none;
+    }
+  }
+`
 
 const NavLink = styled.a`
   font-size: 1.125rem;
@@ -68,6 +90,18 @@ const NavLink = styled.a`
   &:first-of-type {
     color: ${COLORS.secondary};
   }
-`;
 
-export default Header;
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`
+
+const MobileButton = styled(UnstyledButton)`
+  display: none;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: revert;
+  }
+`
+
+export default Header
