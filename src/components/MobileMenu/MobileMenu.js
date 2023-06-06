@@ -1,35 +1,99 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import styled from 'styled-components/macro';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import React from 'react'
+import styled from 'styled-components/macro'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 
-import UnstyledButton from '../UnstyledButton';
-import Icon from '../Icon';
-import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from '../UnstyledButton'
+import Icon from '../Icon'
+import VisuallyHidden from '../VisuallyHidden'
+import { COLORS, WEIGHTS } from '../../constants'
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
-  if (!isOpen) {
-    return null;
+  return (
+    <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+      <Content aria-label="mobile menu">
+        <CloseButton onClick={onDismiss}>
+          <VisuallyHidden>Dismiss menu</VisuallyHidden>
+          <Icon id="close" size={24} strokeWidth={1.5} />
+        </CloseButton>
+        <Nav>
+          <Link href="/sale">Sale</Link>
+          <Link href="/new">New&nbsp;Releases</Link>
+          <Link href="/men">Men</Link>
+          <Link href="/women">Women</Link>
+          <Link href="/kids">Kids</Link>
+          <Link href="/collections">Collections</Link>
+        </Nav>
+        <Footer>
+          <Link href="/terms">Terms and Conditions</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/contact">Contact Us</Link>
+        </Footer>
+      </Content>
+    </Overlay>
+  )
+}
+
+const Overlay = styled(DialogOverlay)`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: hsla(220, 5%, 40%, 0.8);
+`
+
+const Content = styled(DialogContent)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 33%;
+  background: ${COLORS.white};
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+`
+
+const CloseButton = styled(UnstyledButton)`
+  align-self: flex-end;
+`
+
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`
+
+const Footer = styled.footer`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const Link = styled.a`
+  text-decoration: none;
+
+  ${Nav} & {
+    text-transform: uppercase;
+    font-size: ${18 / 16}rem;
+    font-weight: ${WEIGHTS.medium};
+    color: ${COLORS.gray[900]};
+    line-height: ${21 / 16}rem;
+
+    &:first-of-type {
+      color: ${COLORS.secondary};
+    }
   }
 
-  return (
-    <div>
-      <button onClick={onDismiss}>Dismiss menu</button>
-      <nav>
-        <a href="/sale">Sale</a>
-        <a href="/new">New&nbsp;Releases</a>
-        <a href="/men">Men</a>
-        <a href="/women">Women</a>
-        <a href="/kids">Kids</a>
-        <a href="/collections">Collections</a>
-      </nav>
-      <footer>
-        <a href="/terms">Terms and Conditions</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/contact">Contact Us</a>
-      </footer>
-    </div>
-  );
-};
+  ${Footer} & {
+    font-size: ${14 / 16}rem;
+    font-weight: ${WEIGHTS.normal};
+    color: ${COLORS.gray[700]};
+    line-height: 1rem;
+  }
+`
 
-export default MobileMenu;
+export default MobileMenu
