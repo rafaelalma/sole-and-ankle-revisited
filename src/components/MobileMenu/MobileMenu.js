@@ -40,7 +40,7 @@ const Overlay = styled(DialogOverlay)`
   right: 0;
   bottom: 0;
   left: 0;
-  background: hsla(220, 5%, 40%, 0.8);
+  background: hsla(var(--color-gray-hue) 5% 40% / 0.8);
 `
 
 const Content = styled(DialogContent)`
@@ -49,7 +49,7 @@ const Content = styled(DialogContent)`
   right: 0;
   bottom: 0;
   left: 33%;
-  background: ${COLORS.white};
+  background: var(--color-white);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -84,7 +84,7 @@ const Link = styled.a`
     line-height: ${21 / 16}rem;
 
     &:first-of-type {
-      color: ${COLORS.secondary};
+      color: var(--color-secondary);
     }
   }
 

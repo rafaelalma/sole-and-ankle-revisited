@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 `
 
 const MarketingMessage = styled.span`
-  color: ${COLORS.white};
+  color: var(--color-white);
   margin-right: auto;
 `
 
